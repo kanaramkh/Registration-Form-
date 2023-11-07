@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OTP Verification Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="/verifyEmail" method="post">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required><br><br>
+
+        <input type="button" id="generateOTP" value="Generate OTP">
+        <input type="text" name="otp" id="otp" placeholder="Enter OTP" required><br><br>
+
+        <input type="submit" value="Verify Email">
+    </form>
+
+    <script>
+        const generateOTPButton = document.getElementById('generateOTP');
+        generateOTPButton.addEventListener('click', async () => {
+            const response = await fetch('/generateOTP', { method: 'POST' });
+            const data = await response.json();
+            document.getElementById('otp').value = data.otp;
+        });
+    </script>
+</body>
+</html>
+
